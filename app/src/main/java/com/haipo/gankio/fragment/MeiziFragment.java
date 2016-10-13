@@ -2,10 +2,11 @@ package com.haipo.gankio.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,8 @@ public class MeiziFragment extends Fragment {
 
     @BindView(R.id.girl_recycler_view)
     RecyclerView mGirlRecyclerView;
-    @BindView(R.id.navigation)
-    NavigationView mNavigationView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private Unbinder mUnbinder;
 
@@ -43,6 +44,7 @@ public class MeiziFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
 
@@ -51,10 +53,12 @@ public class MeiziFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.frg_meizi, container, false);
         mUnbinder = ButterKnife.bind(this, view);
-        mGirlRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,VERTICAL));
+        mGirlRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, VERTICAL));
         mGirlRecyclerView.setAdapter(new MeiziRecyclerViewAdapter());
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
         return view;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -63,7 +67,7 @@ public class MeiziFragment extends Fragment {
     }
 
 
-    private class MeiziHolder extends RecyclerView.ViewHolder{
+    private class MeiziHolder extends RecyclerView.ViewHolder {
 
 
         private final RatioImageView mGirlImageView;
@@ -73,7 +77,7 @@ public class MeiziFragment extends Fragment {
             mGirlImageView = (RatioImageView) itemView.findViewById(R.id.girl_image_view);
         }
 
-        private void BindData(){
+        private void BindData() {
             mGirlImageView.setRadio(0.5f);
             mGirlImageView.setImageResource(R.mipmap.ic_launcher);
         }
@@ -99,7 +103,6 @@ public class MeiziFragment extends Fragment {
         public int getItemCount() {
             return 20;
         }
-
 
 
     }
