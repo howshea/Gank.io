@@ -1,4 +1,4 @@
-package com.haipo.gankio;
+package com.haipo.gankio.POJO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.haipo.gankio.net;
 
-import com.haipo.gankio.Meizi;
+import com.haipo.gankio.POJO.Meizi;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -12,6 +12,6 @@ import rx.Observable;
 
 public interface ApiService {
 
-    @GET("data/%E7%A6%8F%E5%88%A9/{count}/{page}")
+    @GET("data/福利/{count}/{page}")
     Observable<Meizi> getMeizi(@Path("count") int count, @Path("page") int page);
 }

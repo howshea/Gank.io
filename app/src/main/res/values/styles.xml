@@ -10,4 +10,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.ActionBar">
+        <item name="actionBarStyle">@style/Theme.AppCompat.Light.DarkActionBar</item>
+
+    </style>
 </resources>

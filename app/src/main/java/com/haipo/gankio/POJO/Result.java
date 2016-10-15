@@ -1,4 +1,4 @@
-package com.haipo.gankio;
+package com.haipo.gankio.POJO;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,16 +10,16 @@ public class Result {
 
 
     @SerializedName("_id")
-    String id;
+    private String id;
 
-    String createdAt;
-    String desc;
-    String publishedAt;
-    String source;
-    String type;
-    String url;
-    boolean used;
-    String who;
+    private String createdAt;
+    private String desc;
+    private String publishedAt;
+    private String source;
+    private  String type;
+    private String url;
+    private boolean used;
+    private String who;
 
     public String getId() {
         return id;

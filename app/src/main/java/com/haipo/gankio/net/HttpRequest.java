@@ -1,7 +1,7 @@
 package com.haipo.gankio.net;
 
-import com.haipo.gankio.Meizi;
-import com.haipo.gankio.Result;
+import com.haipo.gankio.POJO.Meizi;
+import com.haipo.gankio.POJO.Result;
 
 import java.util.concurrent.TimeUnit;
 

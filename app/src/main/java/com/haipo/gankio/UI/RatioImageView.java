@@ -9,7 +9,7 @@ import android.widget.ImageView;
  */
 
 public class RatioImageView extends ImageView {
-    private float radio;
+//    private float radio;
 
     public RatioImageView(Context context) {
         super(context);
@@ -23,14 +23,20 @@ public class RatioImageView extends ImageView {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setRadio(float radio) {
-        this.radio = radio;
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = (int) (width / radio);
-        setMeasuredDimension(width,height);
-    }
+//    public void setRadio(float radio) {
+//        this.radio = radio;
+//    }
+//
+//
+//
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        if (radio != 0) {
+//            int width = MeasureSpec.getSize(widthMeasureSpec);
+//            int height = (int) (width / radio);
+//            setMeasuredDimension(width, height);
+//        } else {
+//            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        }
+//    }
 }
