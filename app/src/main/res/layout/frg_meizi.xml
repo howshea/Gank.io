@@ -5,17 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="16dp"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:theme="@style/AppTheme.ActionBar"
             app:title="@string/app_name"/>
     </android.support.design.widget.AppBarLayout>

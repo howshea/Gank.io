@@ -13,9 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.haipo.gankio.R;
 import com.haipo.gankio.UI.RatioImageView;
+import com.haipo.gankio.Utils.Utils;
 import com.haipo.gankio.net.HttpRequest;
 
 import java.util.ArrayList;
@@ -96,10 +96,8 @@ public class MeiziFragment extends Fragment {
         }
 
         public void BindData(int position) {
-            Glide.with(mContext)
-                    .load(mPictureUrlList.get(position))
-                    .asBitmap()
-                    .into(mGirlImageView);
+
+            Utils.imageLoader(MeiziFragment.this,mPictureUrlList.get(position),mGirlImageView);
         }
     }
 
@@ -130,7 +128,7 @@ public class MeiziFragment extends Fragment {
     /**
      * 发起请求返回数据
      */
-    private void requestMeizi() {
+    private void requestMeizi(int count,int page) {
         mSubscriber = new Subscriber<String>() {
 
             @Override
@@ -152,11 +150,14 @@ public class MeiziFragment extends Fragment {
             }
         };
 
-        HttpRequest.getInstance().getMeizi(mSubscriber, 10, 1);
+        HttpRequest.getInstance().getMeizi(mSubscriber, count, page);
 
     }
 
 
+    /**
+     * 初始化首页数据
+     */
     private void initData(){
 
 
