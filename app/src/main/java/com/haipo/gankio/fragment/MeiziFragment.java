@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -36,18 +37,21 @@ public class MeiziFragment extends Fragment {
     RecyclerView mGirlRecyclerView;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.meizi_refresh_layout)
+    SwipeRefreshLayout mRefreshLayout;
 
     private Unbinder mUnbinder;
     private Subscriber<String> mSubscriber;
     private List<String> mPictureUrlList = new ArrayList<>();
     private AppCompatActivity mContext;
     private MeiziRecyclerViewAdapter mAdapter;
-    ;
+    private int mPage;
+    private StaggeredGridLayoutManager mLayoutManager;
 
     public static MeiziFragment newInstance() {
-        Bundle args = new Bundle();
+//        Bundle args = new Bundle();
         MeiziFragment fragment = new MeiziFragment();
-        fragment.setArguments(args);
+//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -71,6 +75,16 @@ public class MeiziFragment extends Fragment {
 
 
         initData();
+
+        mRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPictureUrlList.clear();
+                latestMeizi(10, 1);
+                mPage = 1;
+            }
+        });
 
 
         return view;
@@ -97,7 +111,7 @@ public class MeiziFragment extends Fragment {
 
         public void BindData(int position) {
 
-            Utils.imageLoader(MeiziFragment.this,mPictureUrlList.get(position),mGirlImageView);
+            Utils.imageLoader(MeiziFragment.this, mPictureUrlList.get(position), mGirlImageView);
         }
     }
 
@@ -128,7 +142,7 @@ public class MeiziFragment extends Fragment {
     /**
      * 发起请求返回数据
      */
-    private void requestMeizi(int count,int page) {
+    private void latestMeizi(int count, int page) {
         mSubscriber = new Subscriber<String>() {
 
             @Override
@@ -137,6 +151,11 @@ public class MeiziFragment extends Fragment {
                     Log.i("meiziUrl", s);
                 }
                 mAdapter.notifyDataSetChanged();
+
+                if (mRefreshLayout.isRefreshing()) {
+                    mRefreshLayout.setRefreshing(false);
+                }
+//                mLayoutManager.scrollToPosition(mPictureUrlList.size() - 10);
             }
 
             @Override
@@ -158,14 +177,13 @@ public class MeiziFragment extends Fragment {
     /**
      * 初始化首页数据
      */
-    private void initData(){
-
-
+    private void initData() {
+        mPage = 1;
         HttpRequest.getInstance().getMeizi(new Subscriber<String>() {
             @Override
             public void onCompleted() {
                 initRecyclerView();
-                Snackbar.make(mToolbar,"妹子加载完毕",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mToolbar, "妹子加载完毕", Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
@@ -177,24 +195,37 @@ public class MeiziFragment extends Fragment {
             public void onNext(String s) {
                 mPictureUrlList.add(s);
             }
-        }, 10, 1);
+        }, 10, mPage);
 
 
     }
 
-    private void initRecyclerView(){
-        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
+    private void initRecyclerView() {
+        mLayoutManager = new StaggeredGridLayoutManager(
                 2, StaggeredGridLayoutManager.VERTICAL);
-        mGirlRecyclerView.setLayoutManager(layoutManager);
-        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        mGirlRecyclerView.setLayoutManager(mLayoutManager);
+        mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mAdapter = new MeiziRecyclerViewAdapter();
         mGirlRecyclerView.setAdapter(mAdapter);
 
         mGirlRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                layoutManager.invalidateSpanAssignments();
+                mLayoutManager.invalidateSpanAssignments();
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int lastIndex = 0;
+                    int[] ints = mLayoutManager.findLastVisibleItemPositions(null);
+                    lastIndex = ints[0] > ints[1] ? ints[0] : ints[1];
+                    if (lastIndex + 1 == mAdapter.getItemCount()) {
+                        if (!mRefreshLayout.isRefreshing()) {
+                            mRefreshLayout.setRefreshing(true);
+                        }
+                        latestMeizi(10, ++mPage);
+                    }
+
+                }
+
             }
         });
     }
