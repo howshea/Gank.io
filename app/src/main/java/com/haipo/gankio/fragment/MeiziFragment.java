@@ -5,10 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,21 +27,25 @@ import rx.Subscriber;
 
 /**
  * Created by haipo on 2016/10/11.
+ *
+ * 未解决问题：
+ *
+ * 没有网或者联网失败时没有相应的提示
+ *
+ * 图片闪烁
+ *
  */
 
 public class MeiziFragment extends Fragment {
 
-    @BindView(R.id.girl_recycler_view)
-    RecyclerView mGirlRecyclerView;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.meizi_recycler_view)
+    RecyclerView mMeiziRecyclerView;
     @BindView(R.id.meizi_refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
 
     private Unbinder mUnbinder;
     private Subscriber<String> mSubscriber;
     private List<String> mPictureUrlList = new ArrayList<>();
-    private AppCompatActivity mContext;
     private MeiziRecyclerViewAdapter mAdapter;
     private int mPage;
     private StaggeredGridLayoutManager mLayoutManager;
@@ -68,12 +70,6 @@ public class MeiziFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.frg_meizi, container, false);
         mUnbinder = ButterKnife.bind(this, view);
-        //初始化toolbar
-        mContext = (AppCompatActivity) getActivity();
-
-        mContext.setSupportActionBar(mToolbar);
-
-
         initData();
 
         mRefreshLayout.setColorSchemeResources(R.color.colorAccent);
@@ -151,7 +147,6 @@ public class MeiziFragment extends Fragment {
                     Log.i("meiziUrl", s);
                 }
                 mAdapter.notifyDataSetChanged();
-
                 if (mRefreshLayout.isRefreshing()) {
                     mRefreshLayout.setRefreshing(false);
                 }
@@ -160,7 +155,7 @@ public class MeiziFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
-                Log.e("Meizi", "获取数据失败", e);
+                Log.e("MeiziList", "获取数据失败", e);
             }
 
             @Override
@@ -183,7 +178,7 @@ public class MeiziFragment extends Fragment {
             @Override
             public void onCompleted() {
                 initRecyclerView();
-                Snackbar.make(mToolbar, "妹子加载完毕", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mRefreshLayout, "妹子加载完毕", Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
@@ -203,12 +198,12 @@ public class MeiziFragment extends Fragment {
     private void initRecyclerView() {
         mLayoutManager = new StaggeredGridLayoutManager(
                 2, StaggeredGridLayoutManager.VERTICAL);
-        mGirlRecyclerView.setLayoutManager(mLayoutManager);
+        mMeiziRecyclerView.setLayoutManager(mLayoutManager);
         mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mAdapter = new MeiziRecyclerViewAdapter();
-        mGirlRecyclerView.setAdapter(mAdapter);
+        mMeiziRecyclerView.setAdapter(mAdapter);
 
-        mGirlRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mMeiziRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

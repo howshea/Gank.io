@@ -1,4 +1,4 @@
-package com.haipo.gankio.POJO;
+package com.haipo.gankio.Entity;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by haipo on 2016/10/13.
  */
 
-public class Result {
+public class Meizi {
 
 
     @SerializedName("_id")

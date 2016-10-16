@@ -1,7 +1,7 @@
 package com.haipo.gankio.net;
 
-import com.haipo.gankio.POJO.Meizi;
-import com.haipo.gankio.POJO.Result;
+import com.haipo.gankio.Entity.MeiziList;
+import com.haipo.gankio.Entity.Meizi;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,16 +54,16 @@ public class HttpRequest {
 
     public void getMeizi(Subscriber<String> subscriber, int count, int page){
         mApiService.getMeizi(count,page)
-                .flatMap(new Func1<Meizi, Observable<Result>>() {
+                .flatMap(new Func1<MeiziList, Observable<Meizi>>() {
                     @Override
-                    public Observable<Result> call(Meizi meizi) {
-                        return Observable.from(meizi.getResults());
+                    public Observable<Meizi> call(MeiziList meizi) {
+                        return Observable.from(meizi.getMeizis());
                     }
                 })
-                .map(new Func1<Result, String>() {
+                .map(new Func1<Meizi, String>() {
                     @Override
-                    public String call(Result result) {
-                        return result.getUrl();
+                    public String call(Meizi meizi) {
+                        return meizi.getUrl();
                     }
                 })
                 .subscribeOn(Schedulers.io())
