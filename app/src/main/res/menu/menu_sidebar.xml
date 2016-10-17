@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title=""
-          android:icon=" "/>
-    <item android:title=""
-          android:icon=" "/>
-    <item android:title=""
-          android:icon=" "/>
-    <item android:title=""
-          android:icon=" "/>
-    <item android:title=""
-          android:icon=" "/>
-    <item android:title=""
-          android:icon=" "/>
-    <item
-        android:icon="@mipmap/ic_launcher"
-        android:title="Item"
-        />
-    <item android:title="Contacts">
+    <item android:title="@string/android"
+          android:icon="@mipmap/ic_android"/>
+    <item android:title="@string/ios"
+          android:icon="@mipmap/os_ios_dark"/>
+    <item android:title="@string/front_end"
+          android:icon="@mipmap/ic_html"/>
+    <item android:title="@string/app"
+          android:icon="@mipmap/ic_app"/>
+    <item android:title="@string/expanding_resources"
+          android:icon="@mipmap/ic_resouces"/>
+    <item android:title="@string/recommend"
+          android:icon="@mipmap/ic_recommed"/>
+    <item android:title="@string/contact">
         <menu>
-            <item android:title="关于"
-                  android:icon="@mipmap/ic_launcher"/>
-            <item android:title="反馈"
-                  android:icon="@mipmap/ic_launcher"/>
+            <item android:title="@string/about"
+                  android:icon="@mipmap/ic_about"/>
+            <item android:title="@string/feed_back"
+                  android:icon="@mipmap/ic_feedback"/>
         </menu>
     </item>
 </menu>

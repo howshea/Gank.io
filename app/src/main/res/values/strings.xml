@@ -2,4 +2,13 @@
     <string name="app_name">Gank.io</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="android">Android</string>
+    <string name="ios">IOS</string>
+    <string name="front_end">前端</string>
+    <string name="app">App</string>
+    <string name="recommend">瞎推荐</string>
+    <string name="expanding_resources">拓展资源</string>
+    <string name="contact">Contact</string>
+    <string name="about">关于</string>
+    <string name="feed_back">反馈</string>
 </resources>
