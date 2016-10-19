@@ -7,11 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.haipo.gankio.Entity.Meizi;
 import com.haipo.gankio.R;
 import com.haipo.gankio.UI.RatioImageView;
 import com.haipo.gankio.Utils.Utils;
@@ -27,13 +27,12 @@ import rx.Subscriber;
 
 /**
  * Created by haipo on 2016/10/11.
- *
+ * <p>
  * 未解决问题：
- *
+ * <p>
  * 没有网或者联网失败时没有相应的提示
- *
+ * <p>
  * 图片闪烁
- *
  */
 
 public class MeiziFragment extends Fragment {
@@ -45,7 +44,7 @@ public class MeiziFragment extends Fragment {
 
     private Unbinder mUnbinder;
     private Subscriber<String> mSubscriber;
-    private List<String> mPictureUrlList = new ArrayList<>();
+    private List<Meizi> mMeiziList = new ArrayList<>();
     private MeiziRecyclerViewAdapter mAdapter;
     private int mPage;
     private StaggeredGridLayoutManager mLayoutManager;
@@ -76,7 +75,7 @@ public class MeiziFragment extends Fragment {
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPictureUrlList.clear();
+                mMeiziList.clear();
                 latestMeizi(10, 1);
                 mPage = 1;
             }
@@ -99,15 +98,16 @@ public class MeiziFragment extends Fragment {
 
         private RatioImageView mGirlImageView;
 
-
         public MeiziHolder(View itemView) {
             super(itemView);
             mGirlImageView = (RatioImageView) itemView.findViewById(R.id.girl_image_view);
         }
 
         public void BindData(int position) {
+            mGirlImageView.setRadio(mMeiziList.get(position).getRadio());
+            Utils.imageLoader(MeiziFragment.this, mMeiziList.get(position).getUrl(),
+                    mGirlImageView);
 
-            Utils.imageLoader(MeiziFragment.this, mPictureUrlList.get(position), mGirlImageView);
         }
     }
 
@@ -129,7 +129,8 @@ public class MeiziFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return mPictureUrlList.size();
+            return mMeiziList.size();
+
         }
 
 
@@ -139,33 +140,28 @@ public class MeiziFragment extends Fragment {
      * 发起请求返回数据
      */
     private void latestMeizi(int count, int page) {
-        mSubscriber = new Subscriber<String>() {
+
+        Subscriber subscriber = new Subscriber<Meizi>() {
 
             @Override
             public void onCompleted() {
-                for (String s : mPictureUrlList) {
-                    Log.i("meiziUrl", s);
-                }
-                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyItemChanged(mMeiziList.size()-10);
                 if (mRefreshLayout.isRefreshing()) {
                     mRefreshLayout.setRefreshing(false);
                 }
-//                mLayoutManager.scrollToPosition(mPictureUrlList.size() - 10);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("MeiziList", "获取数据失败", e);
+
             }
 
             @Override
-            public void onNext(String s) {
-                mPictureUrlList.add(s);
+            public void onNext(Meizi meizi) {
+                mMeiziList.add(meizi);
             }
         };
-
-        HttpRequest.getInstance().getMeizi(mSubscriber, count, page);
-
+        HttpRequest.getInstance().getMeizi(subscriber, count, page);
     }
 
 
@@ -174,10 +170,13 @@ public class MeiziFragment extends Fragment {
      */
     private void initData() {
         mPage = 1;
-        HttpRequest.getInstance().getMeizi(new Subscriber<String>() {
+        HttpRequest.getInstance().getMeizi(new Subscriber<Meizi>() {
             @Override
             public void onCompleted() {
                 initRecyclerView();
+                if (mRefreshLayout.isRefreshing()) {
+                    mRefreshLayout.setRefreshing(false);
+                }
                 Snackbar.make(mRefreshLayout, "妹子加载完毕", Snackbar.LENGTH_SHORT).show();
             }
 
@@ -187,41 +186,46 @@ public class MeiziFragment extends Fragment {
             }
 
             @Override
-            public void onNext(String s) {
-                mPictureUrlList.add(s);
+            public void onNext(Meizi m) {
+                mMeiziList.add(m);
             }
         }, 10, mPage);
 
 
     }
 
-    private void initRecyclerView() {
-        mLayoutManager = new StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.VERTICAL);
-        mMeiziRecyclerView.setLayoutManager(mLayoutManager);
-        mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        mAdapter = new MeiziRecyclerViewAdapter();
-        mMeiziRecyclerView.setAdapter(mAdapter);
-
-        mMeiziRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                mLayoutManager.invalidateSpanAssignments();
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    int lastIndex = 0;
-                    int[] ints = mLayoutManager.findLastVisibleItemPositions(null);
-                    lastIndex = ints[0] > ints[1] ? ints[0] : ints[1];
-                    if (lastIndex + 1 == mAdapter.getItemCount()) {
-                        if (!mRefreshLayout.isRefreshing()) {
-                            mRefreshLayout.setRefreshing(true);
-                        }
-                        latestMeizi(10, ++mPage);
+    private RecyclerView.OnScrollListener mScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//            mLayoutManager.invalidateSpanAssignments();
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                int lastIndex = 0;
+                int[] ints = mLayoutManager.findLastVisibleItemPositions(null);
+                lastIndex = ints[0] > ints[1] ? ints[0] : ints[1];
+                if (lastIndex + 1 == mAdapter.getItemCount()) {
+                    if (!mRefreshLayout.isRefreshing()) {
+                        mRefreshLayout.setRefreshing(true);
                     }
-
+                    latestMeizi(10, ++mPage);
                 }
 
             }
-        });
+        }
+    };
+
+    private void initRecyclerView() {
+        if (!mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.setRefreshing(true);
+        }
+        mLayoutManager = new StaggeredGridLayoutManager(
+                2, StaggeredGridLayoutManager.VERTICAL);
+        mMeiziRecyclerView.setLayoutManager(mLayoutManager);
+//        mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        mAdapter = new MeiziRecyclerViewAdapter();
+        mMeiziRecyclerView.setAdapter(mAdapter);
+
+        mMeiziRecyclerView.addOnScrollListener(mScrollListener);
     }
+
+
 }

@@ -21,6 +21,8 @@ public class Meizi {
     private boolean used;
     private String who;
 
+    float radio;
+
     public String getId() {
         return id;
     }
@@ -91,6 +93,14 @@ public class Meizi {
 
     public void setWho(String who) {
         this.who = who;
+    }
+
+    public float getRadio() {
+        return radio;
+    }
+
+    public void setRadio(float radio) {
+        this.radio = radio;
     }
 }
 

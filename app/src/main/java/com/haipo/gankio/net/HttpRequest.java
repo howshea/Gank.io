@@ -1,7 +1,8 @@
 package com.haipo.gankio.net;
 
-import com.haipo.gankio.Entity.MeiziList;
 import com.haipo.gankio.Entity.Meizi;
+import com.haipo.gankio.Entity.MeiziList;
+import com.haipo.gankio.Utils.Utils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,16 +25,16 @@ public class HttpRequest {
 
     public static final String BASE_URL = "http://gank.io/api/";
 
-    private static final int DEFAULT_TIMEOUT =5;
+    private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit mRetrofit;
     private ApiService mApiService;
 
-    private HttpRequest(){
+    private HttpRequest() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 
-        mRetrofit =new Retrofit.Builder()
+        mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -43,27 +44,35 @@ public class HttpRequest {
         mApiService = mRetrofit.create(ApiService.class);
     }
 
-    public static HttpRequest getInstance(){
+    public static HttpRequest getInstance() {
         return HttpRequestHolder.sInstance;
     }
 
     //静态内部类单例模式
-    private  static class HttpRequestHolder{
+    private static class HttpRequestHolder {
         private static final HttpRequest sInstance = new HttpRequest();
     }
 
-    public void getMeizi(Subscriber<String> subscriber, int count, int page){
-        mApiService.getMeizi(count,page)
+    public void getMeizi(Subscriber<Meizi> subscriber, int count, int page) {
+        mApiService.getMeizi(count, page)
                 .flatMap(new Func1<MeiziList, Observable<Meizi>>() {
                     @Override
-                    public Observable<Meizi> call(MeiziList meizi) {
-                        return Observable.from(meizi.getMeizis());
+                    public Observable<Meizi> call(MeiziList meiziList) {
+                        return Observable.from(meiziList.getMeizis());
                     }
                 })
-                .map(new Func1<Meizi, String>() {
+                .map(new Func1<Meizi, Meizi>() {
                     @Override
-                    public String call(Meizi meizi) {
-                        return meizi.getUrl();
+                    public Meizi call(final Meizi meizi) {
+                        float radio = Utils.getImageInfo(meizi.getUrl());
+//                        Bitmap bitmap = Utils.imageLoader(new MyApp().getContext(), meizi.getUrl());
+//                        if (bitmap!=null){
+//                            float radio = bitmap.getWidth() / (float) bitmap.getHeight();
+//
+//                            System.out.println("比例是："+radio);
+//                        }
+                        meizi.setRadio(radio);
+                        return meizi;
                     }
                 })
                 .subscribeOn(Schedulers.io())

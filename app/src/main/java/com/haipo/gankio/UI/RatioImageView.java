@@ -1,15 +1,15 @@
 package com.haipo.gankio.UI;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * Created by haipo on 2016/10/11.
  */
 
-public class RatioImageView extends ImageView {
-//    private float radio;
+public class RatioImageView extends AppCompatImageView {
+    private float radio;
 
     public RatioImageView(Context context) {
         super(context);
@@ -23,20 +23,19 @@ public class RatioImageView extends ImageView {
         super(context, attrs, defStyleAttr);
     }
 
-//    public void setRadio(float radio) {
-//        this.radio = radio;
-//    }
-//
-//
-//
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        if (radio != 0) {
-//            int width = MeasureSpec.getSize(widthMeasureSpec);
-//            int height = (int) (width / radio);
-//            setMeasuredDimension(width, height);
-//        } else {
-//            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//        }
-//    }
+    public void setRadio(float radio) {
+        this.radio = radio;
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (radio != 0) {
+            int width = MeasureSpec.getSize(widthMeasureSpec);
+            int height = (int) (width / radio);
+            setMeasuredDimension(width, height);
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+    }
 }
