@@ -1,6 +1,7 @@
-package com.haipo.gankio.activity;
+package com.haipo.gankio.UI.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -9,17 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.haipo.gankio.R;
-import com.haipo.gankio.fragment.MeiziFragment;
+import com.haipo.gankio.UI.fragment.MeiziFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements MeiziFragment.Callback {
 
     @BindView(R.id.base_toolbar)
     Toolbar mToolbar;
     @BindView(R.id.base_drawer_layout)
     DrawerLayout mBaseDrawerLayout;
+    @BindView(R.id.base_fab)
+    FloatingActionButton mBaseFab;
 
     protected Fragment createFragment() {
         return MeiziFragment.newInstance();
@@ -35,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         addFragmentInto();
         initDrawerLayout();
+
     }
 
     private void addFragmentInto(){
@@ -54,5 +58,16 @@ public class BaseActivity extends AppCompatActivity {
                 , R.string.open, R.string.close);
         drawerToggle.syncState();
         mBaseDrawerLayout.addDrawerListener(drawerToggle);
+    }
+
+
+    @Override
+    public void hidefab() {
+        mBaseFab.hide();
+    }
+
+    @Override
+    public void showfab() {
+        mBaseFab.show();
     }
 }

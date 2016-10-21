@@ -1,4 +1,4 @@
-package com.haipo.gankio.UI;
+package com.haipo.gankio.UI.widget;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;

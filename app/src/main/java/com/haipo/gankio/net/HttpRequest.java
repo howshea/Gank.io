@@ -65,12 +65,6 @@ public class HttpRequest {
                     @Override
                     public Meizi call(final Meizi meizi) {
                         float radio = Utils.getImageInfo(meizi.getUrl());
-//                        Bitmap bitmap = Utils.imageLoader(new MyApp().getContext(), meizi.getUrl());
-//                        if (bitmap!=null){
-//                            float radio = bitmap.getWidth() / (float) bitmap.getHeight();
-//
-//                            System.out.println("比例是："+radio);
-//                        }
                         meizi.setRadio(radio);
                         return meizi;
                     }

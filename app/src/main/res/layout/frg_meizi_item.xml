@@ -7,7 +7,7 @@
     android:layout_margin="2dp"
     app:cardElevation="2dp"
     app:cardCornerRadius="2dp">
-    <com.haipo.gankio.UI.RatioImageView
+    <com.haipo.gankio.UI.widget.RatioImageView
         android:id="@+id/girl_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

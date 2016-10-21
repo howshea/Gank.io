@@ -1,4 +1,4 @@
-package com.haipo.gankio.activity;
+package com.haipo.gankio.UI.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

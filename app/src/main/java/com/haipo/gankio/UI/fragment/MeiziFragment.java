@@ -1,4 +1,4 @@
-package com.haipo.gankio.fragment;
+package com.haipo.gankio.UI.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.haipo.gankio.Entity.Meizi;
 import com.haipo.gankio.R;
-import com.haipo.gankio.UI.RatioImageView;
+import com.haipo.gankio.UI.widget.RatioImageView;
 import com.haipo.gankio.Utils.Utils;
 import com.haipo.gankio.net.HttpRequest;
 
@@ -48,6 +48,14 @@ public class MeiziFragment extends Fragment {
     private MeiziRecyclerViewAdapter mAdapter;
     private int mPage;
     private StaggeredGridLayoutManager mLayoutManager;
+    private Callback mCallback;
+
+    public interface Callback {
+        void hidefab();
+
+        void showfab();
+    }
+
 
     public static MeiziFragment newInstance() {
 //        Bundle args = new Bundle();
@@ -60,7 +68,7 @@ public class MeiziFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
+        mCallback = (Callback) getActivity();
     }
 
 
@@ -71,7 +79,7 @@ public class MeiziFragment extends Fragment {
         mUnbinder = ButterKnife.bind(this, view);
         initData();
 
-        mRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        mRefreshLayout.setColorSchemeResources(R.color.AKABENI);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -145,7 +153,7 @@ public class MeiziFragment extends Fragment {
 
             @Override
             public void onCompleted() {
-                mAdapter.notifyItemChanged(mMeiziList.size()-10);
+                mAdapter.notifyItemChanged(mMeiziList.size() - 10);
                 if (mRefreshLayout.isRefreshing()) {
                     mRefreshLayout.setRefreshing(false);
                 }
@@ -199,6 +207,7 @@ public class MeiziFragment extends Fragment {
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 //            mLayoutManager.invalidateSpanAssignments();
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                mCallback.showfab();
                 int lastIndex = 0;
                 int[] ints = mLayoutManager.findLastVisibleItemPositions(null);
                 lastIndex = ints[0] > ints[1] ? ints[0] : ints[1];
@@ -209,6 +218,8 @@ public class MeiziFragment extends Fragment {
                     latestMeizi(10, ++mPage);
                 }
 
+            } else if (newState == RecyclerView.SCROLL_STATE_SETTLING || newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                mCallback.hidefab();
             }
         }
     };

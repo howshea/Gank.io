@@ -3,11 +3,16 @@
     <color name="colorPrimary">#808F7C</color>
     <color name="colorPrimaryDark">#6a7866</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="toolbarTextColor">#FFFFFF</color>
 
     <!--深川鼠-->
     <color name="fukagawanezumi">#77969A</color>
 
     <!--锖浅葱-->
     <color name="SABIASAGI">#6699A1</color>
+
+    <!--千草-->
+    <color name="CHIGUSA">#3A8FB7</color>
+
+    <!--赤红-->
+    <color name="AKABENI">#CB4042</color>
 </resources>
