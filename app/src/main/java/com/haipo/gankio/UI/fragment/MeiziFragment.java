@@ -88,16 +88,14 @@ public class MeiziFragment extends Fragment {
                 mPage = 1;
             }
         });
-
-
         return view;
     }
 
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mUnbinder.unbind();
+        super.onDestroyView();
     }
 
 

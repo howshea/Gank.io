@@ -2,22 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="@string/android"
+          android:id="@+id/menu_item_android"
           android:icon="@mipmap/ic_android"/>
     <item android:title="@string/ios"
+          android:id="@+id/menu_item_ios"
           android:icon="@mipmap/os_ios_dark"/>
     <item android:title="@string/front_end"
+          android:id="@+id/menu_item_front_end"
           android:icon="@mipmap/ic_html"/>
     <item android:title="@string/app"
+          android:id="@+id/menu_item_app"
           android:icon="@mipmap/ic_app"/>
     <item android:title="@string/expanding_resources"
+          android:id="@+id/menu_item_expanding_resources"
           android:icon="@mipmap/ic_resouces"/>
     <item android:title="@string/recommend"
+          android:id="@+id/menu_item_recommend"
           android:icon="@mipmap/ic_recommed"/>
     <item android:title="@string/contact">
         <menu>
             <item android:title="@string/about"
+                  android:id="@+id/menu_item_about"
                   android:icon="@mipmap/ic_about"/>
             <item android:title="@string/feed_back"
+                  android:id="@+id/menu_item_feedback"
                   android:icon="@mipmap/ic_feedback"/>
         </menu>
     </item>

@@ -16,6 +16,6 @@ public interface ApiService {
     Observable<MeiziList> getMeizi(@Path("count") int count, @Path("page") int page);
 
 
-    @GET("data/App/{count}/{page}")
-    Observable<MeiziList> getApp(@Path("count") int count,@Path("page") int page);
+    @GET("data/{type}/{count}/{page}")
+    Observable<MeiziList> getGank(@Path("type") String type, @Path("count") int count, @Path("page") int page);
 }

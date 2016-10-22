@@ -11,9 +11,11 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/base_toolbar"
                 android:layout_width="match_parent"
@@ -33,11 +35,12 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:clickable="true"
+            android:src="@mipmap/ic_today_white_24dp"
+            app:backgroundTint="@color/AKABENI"
             app:elevation="6dp"
-            app:pressedTranslationZ="12dp"
-            android:background="@color/AKABENI"
-            android:src="@mipmap/ic_today_white_24dp"/>
+            app:pressedTranslationZ="12dp"/>
     </android.support.design.widget.CoordinatorLayout>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/base_navigation_view"
         android:layout_width="wrap_content"

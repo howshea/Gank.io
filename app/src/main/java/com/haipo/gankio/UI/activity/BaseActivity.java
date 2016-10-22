@@ -1,13 +1,16 @@
 package com.haipo.gankio.UI.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.haipo.gankio.R;
 import com.haipo.gankio.UI.fragment.MeiziFragment;
@@ -23,6 +26,8 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
     DrawerLayout mBaseDrawerLayout;
     @BindView(R.id.base_fab)
     FloatingActionButton mBaseFab;
+    @BindView(R.id.base_navigation_view)
+    NavigationView mBaseNavigationView;
 
     protected Fragment createFragment() {
         return MeiziFragment.newInstance();
@@ -38,7 +43,7 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
         getSupportActionBar().setHomeButtonEnabled(true);
         addFragmentInto();
         initDrawerLayout();
-
+        initNavigationView();
     }
 
     private void addFragmentInto(){
@@ -60,6 +65,53 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
         mBaseDrawerLayout.addDrawerListener(drawerToggle);
     }
 
+
+    private void initNavigationView(){
+        mBaseNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_item_android:
+                        GotoActivity(getString(R.string.android));
+                        break;
+                    case R.id.menu_item_ios:
+                        GotoActivity(getString(R.string.ios));
+                        break;
+                    case R.id.menu_item_front_end:
+                        GotoActivity(getString(R.string.front_end));
+                        break;
+                    case R.id.menu_item_app:
+                        GotoActivity(getString(R.string.app));
+                        break;
+                    case R.id.menu_item_expanding_resources:
+                        GotoActivity(getString(R.string.expanding_resources));
+                        break;
+                    case R.id.menu_item_recommend:
+                        GotoActivity(getString(R.string.recommend));
+                        break;
+                    case R.id.menu_item_about:
+                        //TODO
+                        break;
+                    case R.id.menu_item_feedback:
+                        //TODO
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void GotoActivity(String type){
+        Intent intent = GankPagerActivity.newIntent(this,type);
+        startActivity(intent);
+
+    }
+
+    @Override
+    protected void onStop() {
+        mBaseDrawerLayout.closeDrawers();
+        super.onStop();
+    }
 
     @Override
     public void hidefab() {

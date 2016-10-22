@@ -44,11 +44,11 @@ public class Utils {
     public static float getImageInfo(String resurl) {
         float radio = 0.5f;
         HttpURLConnection conn = null;
+        Bitmap bitmap = null;
         try {
             URL url = new URL(resurl);
             conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5 * 1000);
-            Bitmap bitmap = null;
             if (conn.getResponseCode() == 200) {
                 InputStream inStream = conn.getInputStream();
                 bitmap = BitmapFactory.decodeStream(inStream);
@@ -58,6 +58,7 @@ public class Utils {
             e.printStackTrace();
         } finally {
            conn.disconnect();
+           bitmap.recycle();
         }
         return radio;
     }

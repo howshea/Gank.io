@@ -3,7 +3,7 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="android">Android</string>
-    <string name="ios">IOS</string>
+    <string name="ios">iOS</string>
     <string name="front_end">前端</string>
     <string name="app">App</string>
     <string name="recommend">瞎推荐</string>
@@ -12,4 +12,5 @@
     <string name="about">关于</string>
     <string name="feed_back">反馈</string>
     <string name="side_bar_title">妹子&amp;Gank.io</string>
+    <string name="gank_desc_head">&#187;</string>
 </resources>

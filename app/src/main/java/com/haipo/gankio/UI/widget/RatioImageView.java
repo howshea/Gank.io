@@ -1,14 +1,14 @@
 package com.haipo.gankio.UI.widget;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 
 /**
  * Created by haipo on 2016/10/11.
  */
 
-public class RatioImageView extends AppCompatImageView {
+public class RatioImageView extends ImageView {
     private float radio;
 
     public RatioImageView(Context context) {
