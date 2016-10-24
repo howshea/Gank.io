@@ -13,4 +13,10 @@
     <string name="feed_back">反馈</string>
     <string name="side_bar_title">妹子&amp;Gank.io</string>
     <string name="gank_desc_head">&#187;</string>
+    <string name="gank_toolbar_title">干货都在这里啦</string>
+    <string name="use_browser">使用浏览器打开</string>
+    <string name="share_to">分享到</string>
+    <string name="sava_success">保存成功</string>
+    <string name="sava_failed">保存失败</string>
+    <string name="please_wait">反馈页面还未开放，有问题请联系haipotao@outlook.com</string>
 </resources>

@@ -18,4 +18,36 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="AuthorTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+
+    </style>
+
+
+    <style name="CommonTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/fukagawanezumi</item>
+        <item name="colorPrimaryDark">@color/fukagawanezumi</item>
+        <item name="colorAccent">@color/AKABENI</item>
+    </style>
+
+    <style name="PictureTheme" parent="CommonTheme">
+        <!-- Customize your theme here. -->
+        <!--<item name="colorPrimary">#AA77969A</item>-->
+        <!--<item name="colorPrimaryDark">#AA77969A</item>-->
+    </style>
+
+    <style name="NumberProgressBar_Red" parent="NumberProgressBar_Funny_Orange">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="max">100</item>
+        <item name="progress">0</item>
+        <item name="progress_unreached_color">#CCCCCC</item>
+        <item name="progress_reached_color">@color/AKABENI</item>
+        <item name="progress_text_size">10sp</item>
+        <item name="progress_reached_bar_height">1.5dp</item>
+        <item name="progress_unreached_bar_height">0.75dp</item>
+    </style>
 </resources>
