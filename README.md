@@ -24,4 +24,4 @@
 * [YeungKC/Gank.io-for-Kotlin-Android](https://github.com/YeungKC/Gank.io-for-Kotlin-Android)
 
 ## 开源协议
-[GPL v3 ]()
+[GPL v3 ](Gank.io/LICENSE)
