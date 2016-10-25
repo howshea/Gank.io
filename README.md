@@ -17,7 +17,7 @@
 > Android 4.1+
 
 ## 数据来源
-[http://ganki.io/api](http://ganki.io/api)
+[http://gank.io/api](http://gank.io/api)
 
 ## 开发过程参考了下面两个项目
 * [Panl/Gank.io](https://github.com/Panl/Gank.io)
