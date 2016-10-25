@@ -10,14 +10,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.howshea.gankio.Entity.History;
 import com.howshea.gankio.R;
+import com.howshea.gankio.UI.fragment.AboutFragment;
 import com.howshea.gankio.UI.fragment.MeiziFragment;
+import com.howshea.gankio.Utils.Utils;
 import com.howshea.gankio.net.HttpRequest;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +39,9 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
     @BindView(R.id.base_navigation_view)
     NavigationView mBaseNavigationView;
 
-    private String mDate;
+    private ArrayList<String> mDateList;
+    private boolean mFinish = false;
+    private static final String ABOUT_DIALOG="aboutDialog";
 
     protected Fragment createFragment() {
         return MeiziFragment.newInstance();
@@ -100,11 +107,13 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
                         GotoActivity(getString(R.string.recommend));
                         break;
                     case R.id.menu_item_about:
-                        //TODO
+                        mBaseDrawerLayout.closeDrawers();
+                        FragmentManager manager = getSupportFragmentManager();
+                        AboutFragment dialogFragment = new AboutFragment();
+                        dialogFragment.show(manager,ABOUT_DIALOG);
                         break;
                     case R.id.menu_item_feedback:
-                        Toast.makeText(BaseActivity.this, R.string.please_wait,
-                                Toast.LENGTH_LONG).show();
+                        Utils.sendEmail(BaseActivity.this, R.string.email_address);
                         break;
                 }
                 return false;
@@ -121,9 +130,11 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
     private void askDate() {
         HttpRequest.getInstance().getDate(new Subscriber<History>() {
 
+
             @Override
             public void onCompleted() {
-                final String date = mDate.replace("-", "/");
+                mFinish = true;
+                final String date = mDateList.get(0).replace("-", "/");
                 mBaseFab.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -141,7 +152,7 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
 
             @Override
             public void onNext(History history) {
-                mDate = history.getResults().get(0);
+                mDateList = (ArrayList<String>) history.getResults();
             }
         });
     }
@@ -150,6 +161,26 @@ public class BaseActivity extends AppCompatActivity implements MeiziFragment.Cal
     protected void onStop() {
         mBaseDrawerLayout.closeDrawers();
         super.onStop();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = new MenuInflater(this);
+        menuInflater.inflate(R.menu.menu_base, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_check_history:
+                if (mFinish) {
+                    Intent i = HistoryActivity.newIntent(this, mDateList);
+                    startActivity(i);
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

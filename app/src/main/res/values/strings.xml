@@ -18,5 +18,13 @@
     <string name="share_to">分享到</string>
     <string name="sava_success">保存成功</string>
     <string name="sava_failed">保存失败</string>
-    <string name="please_wait">反馈页面还未开放，有问题请联系haipotao@outlook.com</string>
+    <string name="please_wait">此页面还未开放，有问题请联系haipotao@outlook.com或863229126@</string>
+    <string name="look_history">查看往期</string>
+    <string name="history_title">历史的车轮滚滚向前</string>
+    <string name="email_address">haipotao@outlook.com</string>
+    <string name="email_text">欢迎反馈！反馈bug的话请带上手机型号和系统版本</string>
+    <string name="about_app">关于Gank.io</string>
+    <string name="about_text">这是一个收集技术博客和妹子图的App，也是我第一个自己独立开发的App，在细节上做了很多尝试，希望有人能喜欢它\n\n感谢代码家提供的开放api：\nhttp://gank.io/api\n\n\n代码开源地址：\nhttps://github.com/howshea/Gank.io</string>
+    <string name="others">联系我</string>
+    <string name="contact_way">我的博客：http://howshea.com\n\n我的邮箱：haipotao@outlook.com\n\nGithub：https://github.com/howshea</string>
 </resources>

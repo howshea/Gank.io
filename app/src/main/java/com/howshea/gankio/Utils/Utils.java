@@ -1,6 +1,7 @@
 package com.howshea.gankio.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.Target;
+import com.howshea.gankio.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +25,7 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class Utils {
+
     public static void imageLoader(Fragment fragment, String url, ImageView imageView) {
         Glide.with(fragment)
                 .load(url)
@@ -31,6 +34,7 @@ public class Utils {
                 .fitCenter()
                 .into(imageView);
     }
+
 
     public static synchronized float imageLoader(Context context, String url) {
         Bitmap bitmap = null;
@@ -54,31 +58,39 @@ public class Utils {
         return spannableString;
     }
 
-    public static String formatDate(String publishAt){
+    public static String formatDate(String publishAt) {
         String[] strings = publishAt.split("T");
         return strings[0];
     }
 
     public static Uri saveFile(Bitmap bitmap, String title) {
-        File filesDir = new File(Environment.getExternalStorageDirectory(),"Gankio/pictures");
+        File filesDir = new File(Environment.getExternalStorageDirectory(), "Gankio/pictures");
         if (!filesDir.exists()) {
             filesDir.mkdirs();
         }
-        File file = new File(filesDir,Utils.formatDate(title) + ".jpg");
+        File file = new File(filesDir, Utils.formatDate(title) + ".jpg");
         FileOutputStream outputStream;
         try {
             outputStream = new FileOutputStream(file);
             assert bitmap != null;
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
             outputStream.flush();
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        }finally {
+        } finally {
 
         }
         return Uri.fromFile(file);
     }
 
+
+    public static void sendEmail(Context context, int emailId) {
+        Uri uri = Uri.parse("mailto:" + context.getString(emailId));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+         intent.putExtra(Intent.EXTRA_SUBJECT, "Gank.io意见反馈"); // 主题
+        intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.email_text)); // 正文
+        context.startActivity(intent);
+    }
 }
