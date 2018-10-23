@@ -4,18 +4,9 @@
 
 ### Version 1.0
 
-终于我也做了一个gank.io的客户端，使用了`Rxjava`+`Retrofit`做网络请求，用`Glide`做了图片加载和缓存，使用更加灵活的`fragment`开发界面，大量使用Material Design的控件，不过配色是按照个人喜好来的。项目还包括：
-- 上拉下拉刷新
-- 多列瀑布流
-- RecyclerView分页
-- 隐式意图掉起外部应用
-- 文件下载
-- 发送广播
-- 图片压缩
-- SpannableString
+终于我也做了一个gank.io的客户端，使用了`Rxjava`+`Retrofit`
 
 在开发过程中踩了不少坑，解决的过程中也开始习惯去读源码，在源码中找关键点，所以这个项目也算是麻雀虽小五脏俱全
-(**上面的icon是自己用PS画的**)
 
 ## 下载地址
 [fir.im/kzt4](http://fir.im/kzt4)

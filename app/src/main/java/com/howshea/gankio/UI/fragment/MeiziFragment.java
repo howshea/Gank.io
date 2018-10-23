@@ -53,6 +53,7 @@ public class MeiziFragment extends Fragment {
     private int mPage;
     private StaggeredGridLayoutManager mLayoutManager;
     private Callback mCallback;
+    private boolean isLoading = false;
 
     public interface Callback {
         void hidefab();
@@ -103,7 +104,7 @@ public class MeiziFragment extends Fragment {
     }
 
 
-    private class MeiziHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class MeiziHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         private RatioImageView mGirlImageView;
@@ -166,6 +167,7 @@ public class MeiziFragment extends Fragment {
             public void onCompleted() {
                 mAdapter.notifyItemChanged(mMeiziList.size() - 10);
                 mRefreshLayout.setRefreshing(false);
+                isLoading = false;
             }
 
             @Override
@@ -173,6 +175,8 @@ public class MeiziFragment extends Fragment {
                 unsubscribe();
                 e.printStackTrace();
                 handleCrash(e);
+                mRefreshLayout.setRefreshing(false);
+                isLoading = false;
             }
 
             @Override
@@ -180,7 +184,7 @@ public class MeiziFragment extends Fragment {
                 mMeiziList.add(meizi);
             }
         };
-        HttpRequest.getInstance().getMeizi(subscriber, count, page,getActivity());
+        HttpRequest.getInstance().getMeizi(subscriber, count, page, getActivity());
     }
 
 
@@ -212,7 +216,7 @@ public class MeiziFragment extends Fragment {
             public void onNext(Meizi m) {
                 mMeiziList.add(m);
             }
-        }, 10, mPage,getActivity());
+        }, 10, mPage, getActivity());
 
 
     }
@@ -223,17 +227,33 @@ public class MeiziFragment extends Fragment {
 //            mLayoutManager.invalidateSpanAssignments();
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                 mCallback.showfab();
-                int lastIndex = 0;
+                int lastIndex;
                 int[] ints = mLayoutManager.findLastVisibleItemPositions(null);
                 lastIndex = ints[0] > ints[1] ? ints[0] : ints[1];
-                if (lastIndex + 1 == mAdapter.getItemCount()) {
+                if (isLoading) {
+                    mRefreshLayout.setRefreshing(true);
+                }
+                if (lastIndex >= mAdapter.getItemCount() - 10 && !isLoading) {
                     mRefreshLayout.setRefreshing(true);
                     latestMeizi(10, ++mPage);
+                    isLoading = true;
                 }
 
             } else if (newState == RecyclerView.SCROLL_STATE_SETTLING || newState == RecyclerView.SCROLL_STATE_DRAGGING) {
                 //在滑动时隐藏FloatActionButton
                 mCallback.hidefab();
+            }
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            int lastIndex;
+            int[] ints = mLayoutManager.findLastVisibleItemPositions(null);
+            lastIndex = ints[0] > ints[1] ? ints[0] : ints[1];
+            if (dy > 0 && lastIndex >= mAdapter.getItemCount() - 10 && !isLoading) {
+                latestMeizi(10, ++mPage);
+                isLoading = true;
             }
         }
     };

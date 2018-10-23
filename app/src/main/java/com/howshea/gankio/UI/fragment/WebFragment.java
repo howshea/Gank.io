@@ -57,14 +57,16 @@ public class WebFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.frg_web, container, false);
-        mWebProgressBar = (NumberProgressBar) v.findViewById(R.id.web_progress_bar);
-        mWebView = (WebView) v.findViewById(R.id.web_view);
-        initWebView();
-        return v;
+        return inflater.inflate(R.layout.frg_web, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mWebProgressBar = (NumberProgressBar) view.findViewById(R.id.web_progress_bar);
+        mWebView = (WebView) view.findViewById(R.id.web_view);
+        initWebView();
+    }
 
     private void initWebView() {
         mWebView.getSettings().setJavaScriptEnabled(true);

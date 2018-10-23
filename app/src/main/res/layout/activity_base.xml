@@ -54,6 +54,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:elevation="16dp"
+        app:itemTextColor="#707070"
+        app:itemIconTint="@color/CHIGUSA"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/menu_sidebar"
         />

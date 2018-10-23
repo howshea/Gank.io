@@ -37,7 +37,7 @@ public class Utils {
 
 
     public static synchronized float imageLoader(Context context, String url) {
-        Bitmap bitmap = null;
+        Bitmap bitmap;
         try {
             bitmap = Glide.with(context)
                     .load(url)
