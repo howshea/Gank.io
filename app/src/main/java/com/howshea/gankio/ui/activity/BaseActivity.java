@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.activity;
+package com.howshea.gankio.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +15,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.howshea.gankio.Entity.History;
+import com.howshea.gankio.entity.History;
 import com.howshea.gankio.R;
-import com.howshea.gankio.UI.fragment.AboutFragment;
-import com.howshea.gankio.UI.fragment.MeiziFragment;
-import com.howshea.gankio.Utils.Utils;
+import com.howshea.gankio.ui.fragment.AboutFragment;
+import com.howshea.gankio.ui.fragment.MeiziFragment;
+import com.howshea.gankio.utils.Utils;
 import com.howshea.gankio.net.HttpRequest;
 
 import java.util.ArrayList;

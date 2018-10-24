@@ -1,8 +1,8 @@
 package com.howshea.gankio.net;
 
-import com.howshea.gankio.Entity.GankList;
-import com.howshea.gankio.Entity.History;
-import com.howshea.gankio.Entity.MeiziList;
+import com.howshea.gankio.entity.GankList;
+import com.howshea.gankio.entity.History;
+import com.howshea.gankio.entity.MeiziList;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

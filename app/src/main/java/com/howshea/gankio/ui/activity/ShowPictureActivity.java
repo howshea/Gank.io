@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.activity;
+package com.howshea.gankio.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 
-import com.howshea.gankio.UI.fragment.ShowPictureFragment;
-import com.howshea.gankio.Utils.Utils;
+import com.howshea.gankio.ui.fragment.ShowPictureFragment;
+import com.howshea.gankio.utils.Utils;
 
 public class ShowPictureActivity extends SingleFragmentActivity {
 

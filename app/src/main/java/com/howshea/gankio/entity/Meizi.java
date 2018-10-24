@@ -1,30 +1,14 @@
-package com.howshea.gankio.Entity;
-
-import android.support.annotation.Nullable;
+package com.howshea.gankio.entity;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * Created by haipo on 2016/10/13.
  */
 
-public class Gank {
+public class Meizi {
 
 
-    /**
-     * _id : 57fd9d61421aa95dd78e8df4
-     * createdAt : 2016-10-12T10:18:09.871Z
-     * desc : Cell 弹性效果
-     * images : ["http://img.gank.io/2178220c-a9bd-46ce-b159-5c6b3df8fd14"]
-     * publishedAt : 2016-10-12T11:40:02.146Z
-     * source : chrome
-     * type : iOS
-     * url : https://github.com/anyashka/CellBounceEffect
-     * used : true
-     * who : 代码家
-     */
     @SerializedName("_id")
     private String id;
 
@@ -32,13 +16,12 @@ public class Gank {
     private String desc;
     private String publishedAt;
     private String source;
-    private String type;
+    private  String type;
     private String url;
     private boolean used;
     private String who;
 
-    @Nullable
-    private List<String> images;
+    float radio;
 
     public String getId() {
         return id;
@@ -112,13 +95,12 @@ public class Gank {
         this.who = who;
     }
 
-    public List<String> getImages() {
-        return images;
+    public float getRadio() {
+        return radio;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setRadio(float radio) {
+        this.radio = radio;
     }
-
 }
 

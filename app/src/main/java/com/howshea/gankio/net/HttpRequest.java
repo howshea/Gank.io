@@ -2,12 +2,12 @@ package com.howshea.gankio.net;
 
 import android.content.Context;
 
-import com.howshea.gankio.Entity.Gank;
-import com.howshea.gankio.Entity.GankList;
-import com.howshea.gankio.Entity.History;
-import com.howshea.gankio.Entity.Meizi;
-import com.howshea.gankio.Entity.MeiziList;
-import com.howshea.gankio.Utils.Utils;
+import com.howshea.gankio.entity.Gank;
+import com.howshea.gankio.entity.GankList;
+import com.howshea.gankio.entity.History;
+import com.howshea.gankio.entity.Meizi;
+import com.howshea.gankio.entity.MeiziList;
+import com.howshea.gankio.utils.Utils;
 
 import java.util.concurrent.TimeUnit;
 

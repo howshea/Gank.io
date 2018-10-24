@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.activity;
+package com.howshea.gankio.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,8 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.howshea.gankio.R;
-import com.howshea.gankio.UI.fragment.GankFragment;
-import com.howshea.gankio.UI.widget.ReformSwipRefreshLayout;
+import com.howshea.gankio.ui.fragment.GankFragment;
+import com.howshea.gankio.ui.widget.ReformSwipRefreshLayout;
 
 import java.util.ArrayList;
 

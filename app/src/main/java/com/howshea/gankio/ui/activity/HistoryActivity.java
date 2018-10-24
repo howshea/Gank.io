@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.activity;
+package com.howshea.gankio.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 import com.howshea.gankio.R;
-import com.howshea.gankio.UI.fragment.HistoryFragment;
+import com.howshea.gankio.ui.fragment.HistoryFragment;
 
 import java.util.ArrayList;
 

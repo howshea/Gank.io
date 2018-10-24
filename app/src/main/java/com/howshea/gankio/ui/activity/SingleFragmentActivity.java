@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.activity;
+package com.howshea.gankio.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

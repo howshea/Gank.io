@@ -1,4 +1,4 @@
-package com.howshea.gankio.Entity;
+package com.howshea.gankio.entity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.fragment;
+package com.howshea.gankio.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.howshea.gankio.R;
-import com.howshea.gankio.UI.activity.WebActivity;
+import com.howshea.gankio.ui.activity.WebActivity;
 
 import java.util.ArrayList;
 

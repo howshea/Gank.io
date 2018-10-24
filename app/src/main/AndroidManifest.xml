@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.howshea.gankio">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.howshea.gankio">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data
-            android:name="com.howshea.gankio.Utils.SimpleGlideModule"
-            android:value="GlideModule"/>
+            android:name="com.howshea.gankio.utils.SimpleGlideModule"
+            android:value="GlideModule" />
 
-        <activity android:name=".UI.activity.BaseActivity">
+        <activity android:name=".ui.activity.BaseActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.activity.GankPagerActivity"
-            android:theme="@style/GankTheme">
-        </activity>
+            android:name=".ui.activity.GankPagerActivity"
+            android:theme="@style/GankTheme" />
         <activity
-            android:name=".UI.activity.WebActivity"
-            android:theme="@style/CommonTheme">
-        </activity>
+            android:name=".ui.activity.WebActivity"
+            android:theme="@style/CommonTheme" />
         <activity
-            android:name=".UI.activity.ShowPictureActivity"
-            android:theme="@style/PictureTheme">
-        </activity>
-        <activity android:name=".UI.activity.HistoryActivity"
-            android:theme="@style/CommonTheme">
-        </activity>
+            android:name=".ui.activity.ShowPictureActivity"
+            android:theme="@style/PictureTheme" />
+        <activity
+            android:name=".ui.activity.HistoryActivity"
+            android:theme="@style/CommonTheme" />
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
     </application>
 
 </manifest>

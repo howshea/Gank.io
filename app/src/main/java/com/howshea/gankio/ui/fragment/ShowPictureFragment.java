@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.fragment;
+package com.howshea.gankio.ui.fragment;
 
 import android.Manifest;
 import android.content.Intent;
@@ -25,7 +25,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.howshea.gankio.R;
-import com.howshea.gankio.Utils.Utils;
+import com.howshea.gankio.utils.Utils;
 
 import rx.Observable;
 import rx.Subscriber;

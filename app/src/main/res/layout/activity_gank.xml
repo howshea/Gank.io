@@ -6,7 +6,7 @@
     android:id="@+id/activity_gank"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.howshea.gankio.UI.activity.GankPagerActivity">
+    tools:context="com.howshea.gankio.ui.activity.GankPagerActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
     </android.support.design.widget.AppBarLayout>
 
-    <com.howshea.gankio.UI.widget.ReformSwipRefreshLayout
+    <com.howshea.gankio.ui.widget.ReformSwipRefreshLayout
         android:id="@+id/gank_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v4.view.ViewPager>
-    </com.howshea.gankio.UI.widget.ReformSwipRefreshLayout>
+    </com.howshea.gankio.ui.widget.ReformSwipRefreshLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

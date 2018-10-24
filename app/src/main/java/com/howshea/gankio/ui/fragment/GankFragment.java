@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.fragment;
+package com.howshea.gankio.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.howshea.gankio.Entity.Gank;
+import com.howshea.gankio.entity.Gank;
 import com.howshea.gankio.R;
-import com.howshea.gankio.UI.activity.WebActivity;
-import com.howshea.gankio.Utils.Utils;
+import com.howshea.gankio.ui.activity.WebActivity;
+import com.howshea.gankio.utils.Utils;
 import com.howshea.gankio.net.HttpRequest;
 
 import java.net.SocketTimeoutException;

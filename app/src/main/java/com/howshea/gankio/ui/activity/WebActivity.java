@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.activity;
+package com.howshea.gankio.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
-import com.howshea.gankio.UI.fragment.WebFragment;
+import com.howshea.gankio.ui.fragment.WebFragment;
 
 /**
  * Created by haipo on 2016/10/23.

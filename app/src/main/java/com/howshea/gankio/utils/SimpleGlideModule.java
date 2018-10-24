@@ -1,4 +1,4 @@
-package com.howshea.gankio.Utils;
+package com.howshea.gankio.utils;
 
 import android.content.Context;
 

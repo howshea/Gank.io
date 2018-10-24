@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.widget;
+package com.howshea.gankio.ui.widget;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;

@@ -1,4 +1,4 @@
-package com.howshea.gankio.UI.fragment;
+package com.howshea.gankio.ui.fragment;
 
 
 import android.app.Dialog;
