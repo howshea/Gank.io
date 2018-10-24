@@ -2,6 +2,8 @@
  ![](http://ww3.sinaimg.cn/large/8127619agw1f94o6x72ooj2074074t8y.jpg)
 > 干货集中营 
 
+（v1.1 偷偷回来更新一波，保证app还能正常运行)
+
 ### Version 1.0
 
 终于我也做了一个gank.io的客户端，使用了`Rxjava`+`Retrofit`
